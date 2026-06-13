@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 echo "Checking out source code"
-                git 'https://github.com/Sudharsan0011/CICD_PROJECT'
+                git 'https://github.com/Yashodhan-Gupta/ltm-project'
                 sh 'sudo chown jenkins:jenkins /var/lib/jenkins/efs'
                 sh 'sudo cp -r * /var/lib/jenkins/efs'
                 sh 'sudo chown jenkins:jenkins /var/lib/jenkins/efs/*'
