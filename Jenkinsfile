@@ -3,7 +3,7 @@ pipeline {
     environment {
         IMAGE_NAME = "mindtreerepo"
         IMAGE_TAG  = "${BUILD_NUMBER}"
-	    IMAGE_REPO="public.ecr.aws/y5h2u1j4/mindtree"
+	    IMAGE_REPO="public.ecr.aws/m1r4i2g4/project-public-repo-mindtree"
  
     }
  
