@@ -25,13 +25,13 @@ pipeline {
             steps {
  
                 sh '''
-                    sudo chown jenkins:jenkins /home/jenkins/build
+                    sudo chown jenkins:jenkins /home/jenkins/workspace
                     sudo chmod 777 /home/jenkins/build
                     cd /home/jenkins/build
-                    sudo chown jenkins:jenkins /home/jenkins/build/*
+                    sudo chown jenkins:jenkins /home/jenkins/workspace/*
                     sudo mvn clean package
                     cd target
-                    cp ROOT.war /home/jenkins/build && cd ..
+                    cp ROOT.war /home/jenkins/workspace && cd ..
                     ls -al
                 '''
             }
@@ -41,11 +41,11 @@ pipeline {
             agent { label 'docker' }
             steps {
                 sh '''
-                    sudo chown jenkins:jenkins /home/jenkins/docker
-                    sudo chmod 777 /home/jenkins/docker
-                    cd /home/jenkins/docker
+                    sudo chown jenkins:jenkins /home/jenkins/workspace
+                    sudo chmod 777 /home/jenkins/workspace
+                    cd /home/jenkins/workspace
                     ls -al
-                    sudo chown jenkins:jenkins /home/jenkins/docker/*
+                    sudo chown jenkins:jenkins /home/jenkins/workspace/*
                     docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
                     aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/m1r4i2g4
                     docker tag ${IMAGE_NAME}:${IMAGE_TAG} public.ecr.aws/m1r4i2g4/project-public-repo-mindtree:latest
