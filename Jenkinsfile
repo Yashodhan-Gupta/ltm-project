@@ -47,7 +47,7 @@ pipeline {
                     ls -al
                     sudo chown jenkins:jenkins /home/jenkins/docker/*
                     docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
-                    aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/y5h2u1j4
+                    aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/m1r4i2g4
                     docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_REPO}:${IMAGE_TAG}
                     docker push ${IMAGE_REPO}:${IMAGE_TAG}
                 '''
