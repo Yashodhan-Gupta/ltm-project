@@ -28,7 +28,7 @@
   <body>
     <tagfiles:header />
     <div id="hate" class="container snakes snake-hater">
-      <h1 class="cover-heading">Hello yashodhan!</h1>
+      <h1 class="cover-heading">Hello yashodhan gupta</h1>
       <p class="lead">A safety resource for snake LOVERS.</p>
       <!--Intro -->
       <h2>What do you think about this cicd integration?</h2>
