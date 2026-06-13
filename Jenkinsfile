@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'controller' }
     environment {
         IMAGE_NAME = "mindtreerepo"
         IMAGE_TAG  = "${BUILD_NUMBER}"
