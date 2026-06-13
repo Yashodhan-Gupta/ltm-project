@@ -3,7 +3,7 @@ pipeline {
     environment {
         IMAGE_NAME = "mindtreerepo"
         IMAGE_TAG  = "${BUILD_NUMBER}"
-	    IMAGE_REPO="public.ecr.aws/m1r4i2g4/project-public-repo-mindtree"
+	    IMAGE_REPO="public.ecr.aws/y5h2u1j4/mindtree"
  
     }
  
@@ -25,13 +25,13 @@ pipeline {
             steps {
  
                 sh '''
-                    sudo chown jenkins:jenkins /home/jenkins/workspace
+                    sudo chown jenkins:jenkins /home/jenkins/build
                     sudo chmod 777 /home/jenkins/build
                     cd /home/jenkins/build
-                    sudo chown jenkins:jenkins /home/jenkins/workspace/*
+                    sudo chown jenkins:jenkins /home/jenkins/build/*
                     sudo mvn clean package
                     cd target
-                    cp ROOT.war /home/jenkins/workspace && cd ..
+                    cp ROOT.war /home/jenkins/build && cd ..
                     ls -al
                 '''
             }
@@ -41,15 +41,15 @@ pipeline {
             agent { label 'docker' }
             steps {
                 sh '''
-                    sudo chown jenkins:jenkins /home/jenkins/workspace
-                    sudo chmod 777 /home/jenkins/workspace
-                    cd /home/jenkins/workspace
+                    sudo chown jenkins:jenkins /home/jenkins/docker
+                    sudo chmod 777 /home/jenkins/docker
+                    cd /home/jenkins/docker
                     ls -al
-                    sudo chown jenkins:jenkins /home/jenkins/workspace/*
+                    sudo chown jenkins:jenkins /home/jenkins/docker/*
                     docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
                     aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/m1r4i2g4
-                    docker tag ${IMAGE_NAME}:${IMAGE_TAG} public.ecr.aws/m1r4i2g4/project-public-repo-mindtree:latest
-                    docker push public.ecr.aws/m1r4i2g4/project-public-repo-mindtree:latest
+                    docker tag ${IMAGE_NAME}:${IMAGE_TAG} public.ecr.aws/m1r4i2g4/project-public-repo-mindtree
+                    docker push ${IMAGE_REPO}:${IMAGE_TAG}
                 '''
             }
         }
